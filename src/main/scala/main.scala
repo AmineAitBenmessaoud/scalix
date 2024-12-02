@@ -13,9 +13,11 @@ object Main extends App {
 
     val response: Response = client.newCall(request).execute()
     val json = parse(response.body().string())
-    val id = (json \"results" \"id")
+    val id = (json \ "results" \ "id") match {
+      case JArray(List(JInt(value))) => value.toInt
+      case _ => throw new RuntimeException("Unexpected JSON structure")
+    }
     println(id) // Print response body
-
     Some(id)
   }
 }
