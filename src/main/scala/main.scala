@@ -5,6 +5,8 @@ object Main extends App {
   import java.io.{File, PrintWriter}
   import scala.io.Source
 
+
+
   def writeToCache(filename: String, data: String): Unit = {
     val file = new File(s"data/$filename")
     file.getParentFile.mkdirs() // Crée les dossiers si nécessaires
@@ -24,7 +26,7 @@ object Main extends App {
       .url(s"https://api.themoviedb.org/3/search/person?query=${name}+${surname}&include_adult=false&language=en-US&page=1")
       .get()
       .addHeader("accept", "application/json")
-      .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI")
+      .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI") // Remplace par ta vraie clé API
       .build()
 
     val response: Response = client.newCall(request).execute()
@@ -43,7 +45,6 @@ object Main extends App {
     }
   }
 
-
   def findActorMovies(actorId: Int): Set[(Int, String)] = {
     val cacheFile = s"actor$actorId.json"
     readFromCache(cacheFile) match {
@@ -60,7 +61,7 @@ object Main extends App {
           .url(s"https://api.themoviedb.org/3/person/$actorId/movie_credits?language=en-US")
           .get()
           .addHeader("accept", "application/json")
-          .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI")
+          .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI") // Remplace par ta vraie clé API
           .build()
         val response = client.newCall(request).execute()
         val json = response.body().string()
@@ -76,10 +77,8 @@ object Main extends App {
   def findMovieDirector(movieId: Int): Option[(Int, String)] = {
     val cacheFile = s"movie$movieId.json"
 
-    // Tente de lire les données depuis le cache
     readFromCache(cacheFile) match {
       case Some(data) =>
-        // Parse les données JSON du cache
         val json = parse(data)
         (for {
           JObject(crewMember) <- (json \ "crew").children
@@ -89,22 +88,19 @@ object Main extends App {
         } yield (id.toInt, name)).headOption
 
       case None =>
-        // Si pas de données en cache, faire une requête à l'API
         val client = new OkHttpClient()
         val request = new Request.Builder()
           .url(s"https://api.themoviedb.org/3/movie/$movieId/credits?language=en-US")
           .get()
           .addHeader("accept", "application/json")
-          .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI")
+          .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDFkOTFlZWNmODdmNDkyNTFlYWQwMDI1Y2EzNWQ0NCIsIm5iZiI6MTczMjcyMDczMC4wNzUsInN1YiI6IjY3NDczODVhYzQ2ZWJkMWZkNGE0MmM0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.iD3MRVlWCQs9xsdbLT2DOo9EZOPlsL9_8LLnZCdRXMI") // Remplace par ta vraie clé API
           .build()
 
         val response = client.newCall(request).execute()
         val json = response.body().string()
 
-        // Enregistre la réponse dans le cache
         writeToCache(cacheFile, json)
 
-        // Parse les données pour extraire le réalisateur
         val parsedJson = parse(json)
         (for {
           JObject(crewMember) <- (parsedJson \ "crew").children
@@ -114,7 +110,6 @@ object Main extends App {
         } yield (id.toInt, name)).headOption
     }
   }
-
 
   case class FullName(name: String, surname: String)
 
@@ -140,6 +135,7 @@ object Main extends App {
     }
   }
 
+  // Exemple d'appel pour tester les collaborations entre deux acteurs
   val actor1 = FullName("Christian", "Bale")
   val actor2 = FullName("Michael", "Caine")
 
@@ -207,6 +203,4 @@ object Main extends App {
       Main.findMovieDirector(movieId).map { case (id, name) => Director(id, name) }
     }
   }
-
-
 }
