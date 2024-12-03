@@ -45,9 +45,6 @@ object Main extends App {
         case _ => None
       }
     }
-    val id= 3951
-    writeToCache(s"actor$id.json", json.toString())
-    Some(1)
   }
 
 
