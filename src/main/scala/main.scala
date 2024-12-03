@@ -32,9 +32,6 @@ object Main extends App {
     val response: Response = client.newCall(request).execute()
     val json = parse(response.body().string())
 
-    // Affiche le JSON pour voir sa structure
-    println(pretty(render(json)))
-
     // Extraire le premier résultat s'il existe
     val results = (json \ "results").children
     results.headOption.flatMap { result =>
@@ -43,6 +40,9 @@ object Main extends App {
         case _ => None
       }
     }
+    val id= 3951
+    writeToCache(s"actor$id.json", json.toString())
+    Some(1)
   }
 
   def findActorMovies(actorId: Int): Set[(Int, String)] = {
@@ -135,17 +135,6 @@ object Main extends App {
     }
   }
 
-  // Exemple d'appel pour tester les collaborations entre deux acteurs
-  val actor1 = FullName("Christian", "Bale")
-  val actor2 = FullName("Michael", "Caine")
-
-  val collaborations = collaboration(actor1, actor2)
-
-  println("Films réalisés ensemble par Christian Bale et Michael Caine avec leur réalisateur :")
-  collaborations.foreach { case (movie, director) =>
-    println(s"Film: $movie, Réalisateur: $director")
-  }
-
   def mostFrequentCollaborations(): List[(Int, Int, Int)] = {
     val actorFiles = new File("data").listFiles().filter(_.getName.startsWith("actor"))
     val actorMovieMap = actorFiles.flatMap { file =>
@@ -168,11 +157,6 @@ object Main extends App {
     collaborations.sortBy(-_._3) // Trier par fréquence décroissante
   }
 
-  // Exemple d'affichage
-  println("Acteurs qui ont le plus souvent joué ensemble :")
-  mostFrequentCollaborations().take(10).foreach { case (actor1, actor2, count) =>
-    println(s"Acteurs $actor1 et $actor2 ont joué ensemble dans $count films.")
-  }
 
   // --- Classes et Objets orientés objet ---
   case class Actor(id: Int, name: String) {
