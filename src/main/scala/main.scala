@@ -30,20 +30,23 @@ object Main extends App {
       .build()
 
     val response: Response = client.newCall(request).execute()
-    val json = parse(response.body().string())
+    val jsonString = response.body().string()
+    val json = parse(jsonString)
 
-    // Extraire le premier résultat s'il existe
-    val results = (json \ "results").children
-    results.headOption.flatMap { result =>
+    // Extraire l'ID de l'acteur
+    (json \ "results").children.headOption.flatMap { result =>
       (result \ "id") match {
-        case JInt(id) => Some(id.toInt)
+        case JInt(id) =>
+          // Utilise l'ID pour créer le nom du fichier cache
+          val cacheFile = s"actor${id.toInt}.json"
+          // Écrit la réponse dans le fichier cache spécifique à l'ID
+          writeToCache(cacheFile, pretty(render(json)))
+          Some(id.toInt)
         case _ => None
       }
     }
-    val id= 3951
-    writeToCache(s"actor$id.json", json.toString())
-    Some(1)
   }
+
 
   def findActorMovies(actorId: Int): Set[(Int, String)] = {
     val cacheFile = s"actor$actorId.json"
