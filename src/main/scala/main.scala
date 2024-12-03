@@ -34,15 +34,14 @@ object Main extends App {
 
     // Extraire le premier résultat s'il existe
     val results = (json \ "results").children
-    results.headOption.flatMap { result =>
+    val id = results.headOption.flatMap { result =>
       (result \ "id") match {
         case JInt(id) => Some(id.toInt)
         case _ => None
       }
     }
-    val id= 3951
     writeToCache(s"actor$id.json", json.toString())
-    Some(1)
+    id.map(_.toInt)
   }
 
   def findActorMovies(actorId: Int): Set[(Int, String)] = {
