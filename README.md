@@ -27,15 +27,16 @@ scalix/
 │   ├── actor_movies.json
 │   └── movie.json
 │
-├── data/                      # Contient les modèles de données
-│   ├── .env                   # Contient la clé API
+├── data/                      # Contient les modèles de données                   
 │   ├── Director               # Réalisateur (placeholder)
+    ├── Actor               
 │   ├── FullName               # Classe pour gérer le nom complet d'une personne
 │   └── Movie                  # Classe Movie
 │
 ├── main/                      # Classes de test
+│   ├── .env                   # Contient la clé API   
 │   ├── TestCache              # Tests pour le mode cache
-│   └── TestNoCache            # Tests pour le mode sans cache
+│   └── TestWithoutCache            # Tests pour le mode sans cache
 │
 ├── request/                   # Requêtes vers l'API TMDB
 │   ├── APIService             # Trait pour l'implémentation de base
