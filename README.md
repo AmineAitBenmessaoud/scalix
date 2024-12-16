@@ -137,6 +137,8 @@ libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.9.3"
 ### 1. Complexité initiale
 - Cela demande un effort supplémentaire pour créer des classes et refactoriser le code existant.
 
+## On a utilisé Github Copilot pour faire quelques commentaires et résoudre des bugs quand on est bloqué
+
 
 
 
