@@ -55,9 +55,9 @@ scalix/
 
 2. Obtenir une clé API depuis [TMDB](https://www.themoviedb.org/).
 
-3. Créer un fichier `.env` dans `data/` :
+3. Créer un fichier `.env` dans `main/` s'il n'existe pas :
    ```text
-   TMDB_API_KEY=YOUR_API_KEY_HERE
+   API_KEY=YOUR_API_KEY_HERE
    ```
 
 ## 🏋️‍♂️ **Installation et Exécution**
