@@ -78,7 +78,9 @@ scalix/
    - En mode **CachedRequest** (avec cache)
 
 Pour tester les deux cas (sans cache, avec cache), on exécute:
+
     - main/TestCache.scala
+    
     - main/TestWithoutCache.scala
 
 
