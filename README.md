@@ -77,23 +77,10 @@ scalix/
    - En mode **SimpleRequest** (sans cache)
    - En mode **CachedRequest** (avec cache)
 
-   Exemple de commande dans un fichier de test :
-   ```scala
-   val apiKey = "VOTRE_API_KEY"
-   val service = new CachedRequest(apiKey)
+Pour tester les deux cas (sans cache, avec cache), on exécute:
+    - main/TestCache.scala
+    - main/TestWithoutCache.scala
 
-   val actor1 = FullName("Leonardo", "DiCaprio")
-   val actor2 = FullName("Brad", "Pitt")
-
-   val collaborations = service.collaboration(actor1, actor2)
-   println(s"Films communs réalisés par les mêmes réalisateurs : $collaborations")
-   ```
-
-## 🧠 **Exécution des Tests**
-Utilisez `sbt` pour compiler et tester le projet :
-```bash
-sbt test
-```
 
 ## 🔑 **Fonctionnalités Principales**
 
