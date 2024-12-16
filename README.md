@@ -31,7 +31,7 @@ scalix/
 │   ├── .env                   # Contient la clé API
 │   ├── Director               # Réalisateur (placeholder)
 │   ├── FullName               # Classe pour gérer le nom complet d'une personne
-│   └── Movie.java             # Classe Java (optionnelle)
+│   └── Movie                  # Classe Movie
 │
 ├── main/                      # Classes de test
 │   ├── TestCache              # Tests pour le mode cache
