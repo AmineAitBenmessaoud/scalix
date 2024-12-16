@@ -115,7 +115,31 @@ libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.9.3"
 libraryDependencies += "io.github.cdimascio" %% "dotenv-scala" % "3.2.0"
 ```
 
-## 📄 **Licence**
-Ce projet est sous licence **MIT**. Voir [LICENSE](LICENSE) pour plus de détails.
+# 📄 **Partie 5: Architecture **
+
+## Avantages de cette nouvelle organisation :
+
+### 1. Encapsulation des données et comportements
+- Les classes `Actor` et `Movie` et les autres classes dans le répertoire model encapsulent leurs propres données (ID, nom, etc.) et méthodes associées (ex. : `fetchId`, `fetchMovies`).
+
+### 2. Lisibilité accrue
+- Le code devient plus lisible, car les actions sont effectuées directement sur des objets `Actor` ou `Movie`, au lieu de passer par des méthodes séparées.
+
+### 3. Réutilisabilité
+- Les classes peuvent être réutilisées dans d'autres parties du projet ou dans de nouvelles fonctionnalités. Par exemple, si on veut étendre notre application.
+
+### 4. Respect du paradigme orienté objet
+- Cette approche respecte le paradigme de la programmation orientée objet en associant données et comportements dans des objets.
+
+---
+
+## Inconvénients :
+
+### 1. Complexité initiale
+- Cela demande un effort supplémentaire pour créer des classes et refactoriser le code existant.
+
+
+
+
 
 ---
