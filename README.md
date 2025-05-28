@@ -1,6 +1,6 @@
 # Scalix: API TMDB Interaction Project
 
-## 📋 **Description**
+## **Description**
 Scalix est un projet en **Scala** permettant d'interagir avec l'API **TMDB** (The Movie Database). Le projet inclut des fonctionnalités pour :
 - Rechercher les **ID des acteurs** en utilisant leurs prénoms et noms.
 - Récupérer les **films associés** à un acteur donné.
@@ -11,13 +11,13 @@ Deux modes d'interaction avec l'API sont disponibles :
 1. **SimpleRequest** : Interaction directe avec l'API.
 2. **CachedRequest** : Utilisation d'un système de cache (JSON) pour éviter des requêtes répétées.
 
-## 🚀 **Technologies Utilisées**
+## **Technologies Utilisées**
 - **Scala 3.3.4**
 - **JSON4S** : Pour la manipulation des données JSON.
 - **TMDB API** : Source de données pour les films, acteurs et réalisateurs.
 - **SBT** : Build tool.
 
-## 📁 **Structure du Projet**
+##  **Structure du Projet**
 
 ```
 scalix/
@@ -46,7 +46,7 @@ scalix/
 └── build.sbt                  # Configuration SBT
 ```
 
-## 🛠️ **Pré-requis**
+##  **Pré-requis**
 
 1. Installer **SBT** et **Scala 3.3.4** :
    ```bash
@@ -60,7 +60,7 @@ scalix/
    API_KEY=YOUR_API_KEY_HERE
    ```
 
-## 🏋️‍♂️ **Installation et Exécution**
+##  **Installation et Exécution**
 
 1. **Cloner le projet** :
    ```bash
@@ -84,7 +84,7 @@ Pour tester les deux cas (sans cache, avec cache), on exécute:
     - main/TestWithoutCache.scala
 
 
-## 🔑 **Fonctionnalités Principales**
+##  **Fonctionnalités Principales**
 
 ### Recherche d'un ID d'Acteur
 ```scala
@@ -106,7 +106,7 @@ service.findMovieDirector(movieId = 550)
 val collaborations = service.collaboration(actor1, actor2)
 ```
 
-## 📝 **Dépendances**
+##  **Dépendances**
 Les dépendances principales sont listées dans le `build.sbt` :
 ```scala
 libraryDependencies += "org.json4s" %% "json4s-ast" % "4.1.0-M8"
@@ -114,7 +114,7 @@ libraryDependencies += "org.json4s" %% "json4s-native" % "4.1.0-M8"
 libraryDependencies += "com.squareup.okhttp3" % "okhttp" % "4.9.3"
 ```
 
-# 📄 **Partie 5: Architecture **
+#  **Partie 5: Architecture **
 
 ## Avantages de cette nouvelle organisation :
 
